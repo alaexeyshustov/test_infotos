@@ -1,0 +1,22 @@
+version: '3'
+services:
+  redis:
+    container_name: redis
+    image: redis:3.2
+    command: redis-server /usr/local/etc/redis/redis.conf
+    volumes:
+      - ./config:/usr/local/etc/redis
+  app:
+    build: .
+    command: bundle exec rails s -p 3000 -b '0.0.0.0'
+    user: $UID
+    environment:
+      RAILS_ENV: development
+      CONTENTFUL_SPACE_ID:
+      CONTENTFUL_ACCESS_TOKEN:
+    volumes:
+      - .:/app
+    ports:
+      - '3000:3000'
+    depends_on:
+      - redis

@@ -1,0 +1,13 @@
+%div.text-center
+  %h1 Categories
+%div.container
+  - @categories.each do |category|
+    %div.row
+      %div.col-md-2
+        = image_tag(category.fields[:icon].try(:url), class: 'img-thumbnail')
+      %div.col-md-2
+        = category.title
+      %div.col-md-2
+        = category.fields[:category_description]
+      %div.col-md-1
+        = link_to('View', category_path(category.title), class: 'btn btn-primary')

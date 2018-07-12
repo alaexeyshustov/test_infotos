@@ -1,0 +1,29 @@
+= link_to('Categories', categories_path)
+
+%div.text-center
+  %h1
+    = @article.title
+%div.container
+  %div.row
+    %div.col-md-2
+      = image_tag(@article.fields[:thumbnail_horizontal].try(:url), class: 'img-thumbnail')
+    %div.col-md-10
+      :markdown
+        #{@article.fields[:content].html_safe}
+
+  - if @article.fields[:related_articles]
+    %div.row
+      %h2 Related Articles
+    - @article.fields[:related_articles].each do |article|
+      %div.row
+        %div.col-md-2
+          = image_tag(article.fields[:thumbnail_horizontal].try(:url) || '', class: 'img-thumbnail')
+        %div.col-md-2
+          = article.fields[:title]
+        %div.col-md-2
+          = article.fields[:excerpt]
+        %div.col-md-2
+          = article.fields[:post_date]
+        %div.col-md-1
+          = link_to('View', article_path(article.slug), class: 'btn btn-primary')
+
