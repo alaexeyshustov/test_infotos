@@ -1,24 +1,27 @@
-# README
+# Base description
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+ruby 2.3.1
+rails 5.2
 
-Things you may want to cover:
+# Extra Gems
+redis, hiredis are used for caching, as I think it's the most reasonable choice
 
-* Ruby version
+contentful is used for sending http requests
 
-* System dependencies
+haml is used for html preprocessing, I just like it
 
-* Configuration
+kaminari is used for pagination
+markdown-rails is used for markdown (just first gem i found)
 
-* Database creation
+# Run application
 
-* Database initialization
+set CONTENTFUL_SPACE_ID and CONTENTFUL_ACCESS_TOKEN in docker-compose.yml
 
-* How to run the test suite
+docker-compose build
+export UID && docker-compose up
 
-* Services (job queues, cache servers, search engines, etc.)
+# Page speed up
 
-* Deployment instructions
-
-* ...
+As I can see there are two ways to minimize number of http request
+1. Request as much as possible, for example request content with prebuild asosiations
+2. Cache api responses somehow, I chose rails object caching with redis backend
