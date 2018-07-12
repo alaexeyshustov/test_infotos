@@ -15,10 +15,9 @@ markdown-rails is used for markdown (just first gem i found)
 
 # Run application
 
-set CONTENTFUL_SPACE_ID and CONTENTFUL_ACCESS_TOKEN in docker-compose.yml
-
-docker-compose build
-export UID && docker-compose up
+1. set CONTENTFUL_SPACE_ID and CONTENTFUL_ACCESS_TOKEN in docker-compose.yml
+2. docker-compose build
+3. export UID && docker-compose up
 
 # Page speed up
 
