@@ -1,4 +1,3 @@
-host: redis
-port: 6379
+url: <%= ENV['REDIS_URL'] || 'redis://redis:6379' %>
 db: 0
 namespace: 'cache'

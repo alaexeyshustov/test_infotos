@@ -16,7 +16,7 @@ module Infotos
 
     config.autoload_paths << Rails.root.join('app/services')
 
-    cache_server = YAML.load(File.read(Rails.root.join('config', 'redis.yml'))).symbolize_keys
+    cache_server = YAML.load(ERB.new(File.read(Rails.root.join('config', 'redis.yml'))).result).symbolize_keys
     cache_server.merge!(driver: :hiredis)
 
     config.cache_store = :redis_cache_store, cache_server
