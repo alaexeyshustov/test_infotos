@@ -3,12 +3,15 @@ module ContentfulEntry
 
   class_methods do
     attr_accessor :content_type
+    attr_accessor :scope
 
     def type(type)
       self.content_type = type
     end
 
     def all(params = {})
+      params.merge!(self.scope.call(self).params) if self.scope
+
       ContentfulApi::Connection.entries(content_type, params)
     end
 
@@ -21,7 +24,7 @@ module ContentfulEntry
     end
 
     def default_scope(lambda)
-      lambda.call(self)
+      self.scope = lambda
     end
 
     def paginate(page_number, limit, params = {})
